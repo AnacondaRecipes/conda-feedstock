@@ -10,7 +10,7 @@ source:
   sha256: ab3eef416ff6d1f452025e6602a2cb85f74cc88ffdc1335ffb7488b37305ab9b
 
 build:
-  number: 2
+  number: 0
   # These are present when the new environment is created
   # so we have to exempt them from the list of initial files
   # for conda-build to realize they should be included.
