@@ -1,4 +1,8 @@
 {% set version = "4.13.0" %}
+# Running the upstream test suite requires the inclusion of test files, which
+# balloons the size of the package and occasionally triggers false-positive
+# security warnings; values can be "yes" or "no".
+{% set run_upstream_tests = "no" %}
 
 package:
   name: conda
@@ -52,15 +56,19 @@ requirements:
     - cytoolz >=0.8.1
 
 test:
+{% if run_upstream_tests == 'yes' %}
   source_files:
     - tests
     - setup.cfg
+{% endif %}
   requires:
+{% if run_upstream_tests == 'yes' %}
     - mock
     - pytest
     - pexpect
     - responses
     # - conda-build  # needed to run the test suite, but we're not doing that right now.
+{% endif %}
     - m2-filesystem  # [win]
     - m2-bash        # [win]
     - m2-base        # [win]
