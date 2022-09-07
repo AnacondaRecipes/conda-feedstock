@@ -9,7 +9,7 @@ unset _CE_M
 unset CONDA_EXE
 
 # Used to rewrite the entry point script so it points to the correct python interpreter
-conda init --all
+#conda init --all
 
 # Used to interactively load shell functions
 eval "$(python -m conda shell.bash hook)"
