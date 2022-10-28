@@ -84,10 +84,11 @@ test:
     - conda-smithy  # [py3k]
 
 about:
-  home: https://conda.io
+  home: https://docs.conda.io/
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.txt
+  license_url: https://github.com/conda/conda/blob/main/LICENSE.txt
   summary: OS-agnostic, system-level binary package and environment manager.
   description: >
     Conda is an open source package management system and environment
@@ -96,6 +97,7 @@ about:
     Linux, OS X and Windows, and was created for Python programs but can
     package and distribute any software.
   doc_url: https://conda.io/projects/conda/en/latest/
+  doc_source_url: https://github.com/conda/conda/tree/main/docs/source
   dev_url: https://github.com/conda/conda
 
 extra:
