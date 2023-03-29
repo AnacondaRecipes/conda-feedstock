@@ -1,6 +1,6 @@
 {% set name = "conda" %}
 {% set version = "23.3.0" %}
-{% set build_number = "0" %}
+{% set build_number = "1" %}
 {% set sha256 = "6e7d8e6247e51847fcf8b264ddfa8eeafc66891db351d5d660ea46c459c46684" %}
 # Running the upstream test suite requires the inclusion of test files, which
 # balloons the size of the package and occasionally triggers false-positive
@@ -16,6 +16,7 @@ source:
   sha256: {{ sha256 }}
   patches:
     - patches/01-deprecations-version-fallback.patch
+    - patches/02-jlap-submodule.patch
 
 build:
   skip: True  # [py<37]
@@ -89,6 +90,7 @@ test:
     - m2-base        # [win]
   imports:
     - conda
+    - conda.gateways.repodata.jlap
     - conda_env
   downstreams:
     - conda-smithy  # [py3k]
