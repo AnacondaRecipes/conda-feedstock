@@ -1,0 +1,25 @@
+From a6ee698691bb98c45f4427edf2de96cebe989a02 Mon Sep 17 00:00:00 2001
+From: Paul Yim <paul.j.yim@gmail.com>
+Date: Fri, 15 Sep 2023 16:48:19 -0400
+Subject: [PATCH] Print abspath of platform module
+
+---
+ conda/base/context.py | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/conda/base/context.py b/conda/base/context.py
+index 27ab88650..e3d4a607a 100644
+--- a/conda/base/context.py
++++ b/conda/base/context.py
+@@ -1085,6 +1085,8 @@ class Context(Configuration):
+                 distinfo = ("Linux", "unknown")
+             distribution_name, distribution_version = distinfo[0], distinfo[1]
+         elif platform_name == "Darwin":
++            print("PLATFORM FILE PATH")
++            print(os.path.abspath(platform.__file__))
+             distribution_name = "OSX"
+             distribution_version = platform.mac_ver()[0]
+         else:
+-- 
+2.32.1 (Apple Git-133)
+

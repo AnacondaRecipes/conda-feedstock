@@ -1,6 +1,6 @@
 {% set name = "conda" %}
 {% set version = "23.7.4" %}
-{% set build_number = "0" %}
+{% set build_number = "1" %}
 {% set sha256 = "24dd9d72ca38b5b47506efc9f45dbcb388279514d4b4cb45889eaf6d7d6b8982" %}
 # Running the upstream test suite requires the inclusion of test files, which
 # balloons the size of the package and occasionally triggers false-positive
@@ -14,9 +14,12 @@ package:
 source:
   url: https://github.com/conda/{{ name }}/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - print_abspath_platform_module.patch
 
 build:
-  skip: True  # [py<38]
+  skip: True  # [py<311]
+  skip: True  # [not (osx and x86_64)]
   number: {{ build_number }}
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv && {{ PYTHON }} -m conda init --install
   # These are present when the new environment is created
