@@ -1,7 +1,7 @@
 {% set name = "conda" %}
-{% set version = "24.9.2" %}
+{% set version = "24.11.0" %}
 {% set build_number = "0" %}
-{% set sha256 = "0dcccbdaab96232dfee4471ca7ea7bbcacdcdf99d161cbb61bd7e92074fa7fcb" %}
+{% set sha256 = "db49f3ead0efd8b2da95a5250860b653bc7216f2845367facdb5a4c51a541230" %}
 # Running the upstream test suite requires the inclusion of test files, which
 # balloons the size of the package and occasionally triggers false-positive
 # security warnings; values can be "yes" or "no".
@@ -16,7 +16,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  skip: True  # [py<38]
+  skip: True  # [py<39]
   number: {{ build_number }}
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv && {{ PYTHON }} -m conda init --install
   # These are present when the new environment is created
