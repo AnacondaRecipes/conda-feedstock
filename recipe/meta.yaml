@@ -5,7 +5,7 @@
 # Running the upstream test suite requires the inclusion of test files, which
 # balloons the size of the package and occasionally triggers false-positive
 # security warnings; values can be "yes" or "no".
-{% set run_upstream_tests = "no" %}
+{% set run_upstream_tests = "yes" %}
 
 package:
   name: {{ name }}
