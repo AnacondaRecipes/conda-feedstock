@@ -78,7 +78,7 @@ test:
 {% if run_upstream_tests == 'yes' %}
   source_files:
     - tests
-    - setup.cfg
+    # - setup.cfg
 {% endif %}
   requires:
 {% if run_upstream_tests == 'yes' %}
