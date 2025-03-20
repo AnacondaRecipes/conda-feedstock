@@ -1,5 +1,6 @@
 build_env_vars:
   ANACONDA_ROCKET_ENABLE_PY313 : yes
+  _CONDA_BUILD_ISOLATED_ACTIVATION : 1
 
 # Building build number 0 with --no-test to circumvent the cyclic dependency on conda-libmamba-solver.
 build_parameters:

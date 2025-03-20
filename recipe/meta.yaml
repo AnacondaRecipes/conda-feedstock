@@ -36,7 +36,6 @@ requirements:
     - m2-filesystem                # [win]
     - m2-bash                      # [win]
     - m2-base                      # [win]
-    - python
   host:
     - python
     - pip
