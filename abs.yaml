@@ -1,8 +1,3 @@
 build_env_vars:
   ANACONDA_ROCKET_ENABLE_PY314 : yes
   _CONDA_BUILD_ISOLATED_ACTIVATION : 1
-
-channels:
-  - https://staging.continuum.io/pbp/fs/menuinst-feedstock/pr20/12b9b53
-  - https://staging.continuum.io/pbp/fs/tqdm-feedstock/pr24/3dc1264
-
