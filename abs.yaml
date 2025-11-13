@@ -1,3 +1,7 @@
 build_env_vars:
   ANACONDA_ROCKET_ENABLE_PY314 : yes
   _CONDA_BUILD_ISOLATED_ACTIVATION : 1
+
+channels:
+  - https://staging.continuum.io/pbp/fs/scikit-build-feedstock/pr8/ea9200c
+  - https://staging.continuum.io/pbp/fs/mamba-feedstock/pr24/939cb1a
