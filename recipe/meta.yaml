@@ -90,8 +90,6 @@ test:
     - responses
     # - conda-build  # needed to run the test suite, but we're not doing that right now.
 {% endif %}
-    - m2-filesystem  # [win]
-    - m2-bash        # [win]
     - msys2-filesystem                # [win]
     - msys2-bash                      # [win]
     - msys2-base                      # [win]
