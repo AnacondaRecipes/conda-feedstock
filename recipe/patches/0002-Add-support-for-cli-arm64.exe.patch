@@ -1,0 +1,55 @@
+From a8409ccc391cbf05dad168e5d474befd6b8c9863 Mon Sep 17 00:00:00 2001
+From: Eric Lundby <Eric.Lundby@gmail.com>
+Date: Wed, 1 Apr 2026 15:21:11 -0600
+Subject: [PATCH] Add support for cli-arm64.exe
+
+---
+ conda/core/initialize.py | 9 +++++++--
+ tests/test_codesigned.py | 4 +++-
+ 2 files changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/conda/core/initialize.py b/conda/core/initialize.py
+index 4cfc7c9ef..e65eb46b2 100644
+--- a/conda/core/initialize.py
++++ b/conda/core/initialize.py
+@@ -30,6 +30,7 @@ how that strategy is implemented.
+ """
+ 
+ import os
++import platform
+ import re
+ import struct
+ import sys
+@@ -1206,8 +1207,12 @@ def make_entry_point(target_path, conda_prefix, module, func):
+ def make_entry_point_exe(target_path, conda_prefix):
+     # target_path: join(conda_prefix, 'Scripts', 'conda.exe')
+     exe_path = target_path
+-    bits = 8 * struct.calcsize("P")
+-    source_exe_path = join(CONDA_PACKAGE_ROOT, "shell", "cli-%d.exe" % bits)
++    machine = platform.machine().lower()
++    if machine in ("arm64", "aarch64"):
++        source_exe_path = join(CONDA_PACKAGE_ROOT, "shell", "cli-arm64.exe")
++    else:
++        bits = 8 * struct.calcsize("P")
++        source_exe_path = join(CONDA_PACKAGE_ROOT, "shell", "cli-%d.exe" % bits)
+     if isfile(exe_path):
+         if compute_sum(exe_path, "md5") == compute_sum(source_exe_path, "md5"):
+             return Result.NO_CHANGE
+diff --git a/tests/test_codesigned.py b/tests/test_codesigned.py
+index da0274e35..be29f600a 100644
+--- a/tests/test_codesigned.py
++++ b/tests/test_codesigned.py
+@@ -86,7 +86,9 @@ def signtool_unsupported() -> bool:
+ 
+ 
+ @pytest.mark.skipif(signtool_unsupported(), reason=signtool_unsupported_because())
+-@pytest.mark.parametrize("stub_file_name", ["cli-32.exe", "cli-64.exe"])
++@pytest.mark.parametrize(
++    "stub_file_name", ["cli-32.exe", "cli-64.exe", "cli-arm64.exe"]
++)
+ def test_stub_exe_signatures(stub_file_name: str) -> None:
+     """Verify that signtool verifies the signature of the stub exes"""
+     stub_file = STUB_FOLDER / stub_file_name
+-- 
+2.50.1 (Apple Git-155)
+

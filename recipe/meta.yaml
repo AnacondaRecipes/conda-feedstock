@@ -17,11 +17,14 @@ source:
   folder: conda-src
   patches:
     - patches/0001-fix-win-arm64.patch  # [win]
+    - patches/0002-Add-support-for-cli-arm64.exe.patch
 
 build:
   skip: True  # [py<310]
   number: {{ build_number }}
-  script: {{ PYTHON }} -m pip install conda-src/ --no-deps --no-build-isolation -vv && {{ PYTHON }} -m conda init --install
+  script:
+    - {{ PYTHON }} -c "import os, shutil; shutil.copy(os.path.join(os.environ['RECIPE_DIR'], 'cli-arm64.exe'), os.path.join('conda-src', 'conda', 'shell', 'cli-arm64.exe'))"  # [win]
+    - {{ PYTHON }} -m pip install conda-src/ --no-deps --no-build-isolation -vv && {{ PYTHON }} -m conda init --install
   # These are present when the new environment is created
   # so we have to exempt them from the list of initial files
   # for conda-build to realize they should be included.
