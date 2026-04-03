@@ -95,7 +95,6 @@ test:
     - msys2-base                      # [win]
   imports:
     - conda
-    - conda_env
   downstreams:
     - conda-smithy  # [py3k]
 
