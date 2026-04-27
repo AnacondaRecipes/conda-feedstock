@@ -16,7 +16,7 @@ source:
   sha256: {{ sha256 }}
   folder: conda-src
   patches:
-1-Add-support-for-cli-arm64.exe.patch
+    - patches/0001-Add-support-for-cli-arm64.exe.patch
 
 build:
   skip: True  # [py<310]
