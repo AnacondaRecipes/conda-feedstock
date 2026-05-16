@@ -1,6 +1,6 @@
 {% set name = "conda" %}
 {% set version = "26.5.0" %}
-{% set build_number = "1" %}
+{% set build_number = "2" %}
 {% set sha256 = "1bb6bf13ea89a7736c0d35adedf8423b108ff3bbfbda35f850838b9d70570bfb" %}
 # Running the upstream test suite requires the inclusion of test files, which
 # balloons the size of the package and occasionally triggers false-positive
@@ -75,6 +75,7 @@ requirements:
     - conda-lockfiles >=0.2.0
     - conda-self >=0.2.0
     - conda-pypi >=0.9.0
+    - conda-rattler-solver >=0.1.0
   run_constrained:
     - conda-build >=25.9
     - conda-content-trust >=0.3.0
