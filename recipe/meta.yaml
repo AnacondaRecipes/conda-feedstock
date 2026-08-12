@@ -1,6 +1,6 @@
 {% set name = "conda" %}
 {% set version = "26.7.0" %}
-{% set build_number = "0" %}
+{% set build_number = "1" %}
 {% set sha256 = "d15d9735d7b46a2c54757b2844b66e71f62441daff36baef070f3cb3a3b257c1" %}
 # Running the upstream test suite requires the inclusion of test files, which
 # balloons the size of the package and occasionally triggers false-positive
@@ -21,9 +21,7 @@ source:
 build:
   skip: True  # [py<310]
   number: {{ build_number }}
-  script:
-    - {{ PYTHON }} -c "import os, shutil; shutil.copy(os.path.join(os.environ['RECIPE_DIR'], 'cli-arm64.exe'), os.path.join('conda-src', 'conda', 'shell', 'cli-arm64.exe'))"  # [win]
-    - {{ PYTHON }} -m pip install conda-src/ --no-deps --no-build-isolation -vv && {{ PYTHON }} -m conda init --install
+  script: {{ PYTHON }} -m pip install conda-src/ --no-deps --no-build-isolation -vv && {{ PYTHON }} -m conda init --install  # [not win]
   # These are present when the new environment is created
   # so we have to exempt them from the list of initial files
   # for conda-build to realize they should be included.
@@ -46,6 +44,7 @@ requirements:
     - pip
     - hatchling >=1.12.2
     - hatch-vcs >=0.2.0
+    - conda-launchers 24.7.1.*  # [win]
     # for `conda init` in build/script above
     - boltons >=23.0.0
     - frozendict >=2.4.2

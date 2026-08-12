@@ -2,8 +2,8 @@ From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 Subject: [PATCH] Use native cli-arm64.exe for win-arm64
 
 Upstream 26.x maps launcher stubs via WINDOWS_LAUNCHER_STUB_PATH; win-arm64
-still pointed at cli-64.exe. Point it at shell/cli-arm64.exe (shipped beside
-the recipe via build/script).
+still pointed at cli-64.exe. Point it at shell/cli-arm64.exe (copied from
+conda-launchers into conda/shell via bld.bat).
 
 ---
  conda/base/constants.py | 3 +--
