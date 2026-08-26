@@ -1,31 +1,23 @@
 "%PYTHON%" -m pip install conda-src/ -vv --no-deps --no-build-isolation
 if errorlevel 1 exit /b 1
 
-REM Copy launchers before `conda init --install`. On win-arm64 the patched
-REM WINDOWS_LAUNCHER_STUB_PATH points at shell/cli-arm64.exe, which is not in
+REM Copy the full launcher set before `conda init --install`. conda-launchers
+REM always ships Anaconda-signed cli-/gui- launchers for x64 and arm64. 
+REM WINDOWS_LAUNCHER_STUB_PATH points at shell/cli-*.exe, which is not in
 REM the upstream sdist; without this copy, make_entry_point_exe fails and conda
-REM reports the misleading "elevated permissions" error.
-set "ARCH_SUFFIX=64"
-if "%SUBDIR%"=="win-arm64" set "ARCH_SUFFIX=arm64"
-if "%SUBDIR%"=="win-32" set "ARCH_SUFFIX=32"
-
+REM reports the misleading "elevated permissions" error. Every Windows subdir
+REM gets the full set so the x64 stubs are the Anaconda-signed builds and
+REM arm64/x64 cross-targeting works from either subdir.
 set "LAUNCHER_SRC=%PREFIX%\share\conda-launchers"
 set "LAUNCHER_DST=%SP_DIR%\conda\shell"
 
-if not exist "%LAUNCHER_SRC%\cli-%ARCH_SUFFIX%.exe" (
-    echo ERROR: missing %LAUNCHER_SRC%\cli-%ARCH_SUFFIX%.exe from conda-launchers
-    exit /b 1
-)
-
-copy /Y "%LAUNCHER_SRC%\cli-%ARCH_SUFFIX%.exe" "%LAUNCHER_DST%\"
-if errorlevel 1 exit /b 1
-
-REM win-64 builds also ship the native ARM64 launcher for cross-targeting.
-if "%SUBDIR%"=="win-64" (
-    if exist "%LAUNCHER_SRC%\cli-arm64.exe" (
-        copy /Y "%LAUNCHER_SRC%\cli-arm64.exe" "%LAUNCHER_DST%\"
-        if errorlevel 1 exit /b 1
+for %%F in (cli-64.exe gui-64.exe cli-arm64.exe gui-arm64.exe) do (
+    if not exist "%LAUNCHER_SRC%\%%F" (
+        echo ERROR: missing %LAUNCHER_SRC%\%%F from conda-launchers
+        exit /b 1
     )
+    copy /Y "%LAUNCHER_SRC%\%%F" "%LAUNCHER_DST%\"
+    if errorlevel 1 exit /b 1
 )
 
 "%PYTHON%" -m conda init --install
