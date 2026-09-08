@@ -1,7 +1,7 @@
 {% set name = "conda" %}
-{% set version = "26.7.1" %}
+{% set version = "26.7.2" %}
 {% set build_number = "1" %}
-{% set sha256 = "012e40073474b5db0c63b447aa1892fd6609bc81f998488221e18f4ee64144e5" %}
+{% set sha256 = "3b9ba0833a52a65960bfd9c40238f9700f673a70a540351b5c6312eedc97ab98" %}
 # Running the upstream test suite requires the inclusion of test files, which
 # balloons the size of the package and occasionally triggers false-positive
 # security warnings; values can be "yes" or "no".
@@ -44,7 +44,7 @@ requirements:
     - pip
     - hatchling >=1.12.2
     - hatch-vcs >=0.2.0
-    - conda-launchers 24.7.1.*  # [win]
+    - conda-launchers 24.7.1 *_6  # [win]
     # for `conda init` in build/script above
     - boltons >=23.0.0
     - frozendict >=2.4.2
