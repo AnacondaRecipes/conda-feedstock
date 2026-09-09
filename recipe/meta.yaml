@@ -16,6 +16,8 @@ source:
   sha256: {{ sha256 }}
   folder: conda-src
   patches:
+    # To be removed on next release:
+    # https://github.com/conda/conda/issues/16293
     - patches/0001-Add-support-for-cli-arm64.exe.patch
 
 build:
