@@ -1,6 +1,6 @@
 {% set name = "conda" %}
 {% set version = "26.7.2" %}
-{% set build_number = "0" %}
+{% set build_number = "1" %}
 {% set sha256 = "3b9ba0833a52a65960bfd9c40238f9700f673a70a540351b5c6312eedc97ab98" %}
 # Running the upstream test suite requires the inclusion of test files, which
 # balloons the size of the package and occasionally triggers false-positive
@@ -15,11 +15,15 @@ source:
   url: https://github.com/conda/{{ name }}/releases/download/{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   folder: conda-src
+  patches:
+    # To be removed on next release:
+    # https://github.com/conda/conda/issues/16293
+    - patches/0001-Add-support-for-cli-arm64.exe.patch
 
 build:
   skip: True  # [py<310]
   number: {{ build_number }}
-  script: {{ PYTHON }} -m pip install conda-src/ --no-deps --no-build-isolation -vv && {{ PYTHON }} -m conda init --install
+  script: {{ PYTHON }} -m pip install conda-src/ --no-deps --no-build-isolation -vv && {{ PYTHON }} -m conda init --install  # [not win]
   # These are present when the new environment is created
   # so we have to exempt them from the list of initial files
   # for conda-build to realize they should be included.
@@ -42,6 +46,7 @@ requirements:
     - pip
     - hatchling >=1.12.2
     - hatch-vcs >=0.2.0
+    - conda-launchers 24.7.1 *_6  # [win]
     # for `conda init` in build/script above
     - boltons >=23.0.0
     - frozendict >=2.4.2
