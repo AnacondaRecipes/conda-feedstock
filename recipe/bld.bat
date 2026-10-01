@@ -1,8 +1,8 @@
 "%PYTHON%" -m pip install conda-src/ -vv --no-deps --no-build-isolation
 if errorlevel 1 exit /b 1
 
-REM Copy the published x64 and ARM64 launchers before conda init --install.
-REM Released conda expects these files under conda/shell.
+REM Keep signed bundled launchers for upgrades performed by older conda versions.
+REM Stage cli-arm64.exe before conda init --install for defaults 26.7.x upgrades.
 set "LAUNCHER_SRC=%PREFIX%\share\conda-launchers"
 set "LAUNCHER_DST=%SP_DIR%\conda\shell"
 
