@@ -1,6 +1,6 @@
 {% set name = "conda" %}
 {% set version = "26.9.3" %}
-{% set build_number = "0" %}
+{% set build_number = "1" %}
 {% set sha256 = "62c99f6194811037ba39bbf38fee5e8167fe444be122905896b24810cb8e04b0" %}
 # Running the upstream test suite requires the inclusion of test files, which
 # balloons the size of the package and occasionally triggers false-positive
@@ -82,6 +82,9 @@ requirements:
     - conda-build >=25.9
     - conda-content-trust >=0.3.0
     - conda-env >=2.6
+    - conda-anaconda-tos >=0.3.0
+    - conda-anaconda-telemetry >=0.3.1
+    - conda-repo-cli >=1.0.222
 
 test:
 {% if run_upstream_tests == 'yes' %}
