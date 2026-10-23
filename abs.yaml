@@ -1,3 +1,8 @@
 build_env_vars:
   ANACONDA_ROCKET_ENABLE_PY314 : yes
   _CONDA_BUILD_ISOLATED_ACTIVATION : 1
+
+
+channels:
+  # Updated msys2 runtime++
+  - https://package-build.anaconda.com/pkg-orchestrator/v1/channels/graphs/54ba31f4-35a5-4f4f-8d9c-0bf85d4178d2
