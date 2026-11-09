@@ -1,7 +1,7 @@
 {% set name = "conda" %}
-{% set version = "26.9.4" %}
+{% set version = "26.10.0" %}
 {% set build_number = "0" %}
-{% set sha256 = "1028ac365f93604b34b30f9fbf24269e0643e415994f3172d63c58d5a5bb7ad2" %}
+{% set sha256 = "cdadec8b466b3441d16a13ef219cbe9b50a3dec9f7d02f8e63b3d1dacd290800" %}
 # Running the upstream test suite requires the inclusion of test files, which
 # balloons the size of the package and occasionally triggers false-positive
 # security warnings; values can be "yes" or "no".
@@ -75,9 +75,10 @@ requirements:
     # Plugins to bundle with conda
     - conda-libmamba-solver >=26.7.0
     - conda-lockfiles >=0.2.2
-    - conda-self >=0.3.0
+    - conda-pycosat-solver >=26.10.0
     - conda-pypi >=0.13.0
-    - conda-rattler-solver >=0.2.0
+    - conda-rattler-solver >=26.10.2
+    - conda-self >=0.3.0
   run_constrained:
     - ca-certificates >=2026.10.20
     - certifi >=2026.10.19
